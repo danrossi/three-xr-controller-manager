@@ -1,0 +1,14 @@
+{
+    "name": "three-xr-controller-manager",
+    "version": "0.1.0",
+    "description": "Three.js XR Controller Manager",
+    "module": "build/three-xr-controller-manager.module.js",
+    "scripts": {
+      "build": "rollup -c rollup.config.js"
+    },
+    "author": "danielr",
+    "devDependencies": {
+      "rollup": "^2.38.0"
+    }
+  }
+  
