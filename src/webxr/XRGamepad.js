@@ -77,7 +77,7 @@ class XRGamepad extends EventDispatcher {
 
 		const controllerGrip = this._controllerGrip;
 
-		controllerGrip.enableUpdate = value;
+		controllerGrip.eventsEnabled = value;
 		if ( value ) {
 
 			controllerGrip.addEventListener( 'update', this._updateRef );
