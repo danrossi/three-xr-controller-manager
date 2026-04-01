@@ -293,7 +293,7 @@ class GripPointerModel extends Object3D {
 
 
 			const intersections = this._raycaster.intersectObjects( objects, recursive );
-			const direction = new Vector3( 0, 0, - 1 );
+			const direction = new Vector3( 0, 0, -1 );
 			if ( intersections.length > 0 ) {
 
 				const intersection = intersections[ 0 ];
@@ -317,7 +317,7 @@ class GripPointerModel extends Object3D {
 	 */
 	setCursor( distance ) {
 
-		const direction = new Vector3( 0, 0, - 1 );
+		const direction = new Vector3( 0, 0, -1 );
 		if ( this._raycaster ) {
 
 			this._cursorObject.position.copy( direction.multiplyScalar( distance ) );
@@ -525,7 +525,7 @@ class GazePointerModel extends Object3D {
 
 
 			const intersections = this.raycaster.intersectObjects( objects, recursive );
-			const direction = new Vector3( 0, 0, - 1 );
+			const direction = new Vector3( 0, 0, -1 );
 			if ( intersections.length > 0 ) {
 
 				const intersection = intersections[ 0 ];
@@ -549,7 +549,7 @@ class GazePointerModel extends Object3D {
 	 */
 	setCursor( distance ) {
 
-		const direction = new Vector3( 0, 0, - 1 );
+		const direction = new Vector3( 0, 0, -1 );
 		if ( this.raycaster ) {
 
 			this.cursorObject.position.copy( direction.multiplyScalar( distance ) );
@@ -583,6 +583,7 @@ class GazePointerModel extends Object3D {
  * @three_import import { XRGamepad } from 'three/addons/webxr/XRGamepad.js';
  * @author Dan Rossi / http://github.com/danrossi
  */
+
 
 class XRGamepad extends EventDispatcher {
 
@@ -649,7 +650,7 @@ class XRGamepad extends EventDispatcher {
 
 		const controllerGrip = this._controllerGrip;
 
-		controllerGrip.enableUpdate = value;
+		controllerGrip.eventsEnabled = value;
 		if ( value ) {
 
 			controllerGrip.addEventListener( 'update', this._updateRef );
@@ -907,7 +908,7 @@ class XRIntersections extends EventDispatcher {
 
 		const index = this._collisions.indexOf( object );
 
-		if ( index > - 1 ) {
+		if ( index > -1 ) {
 
 			this._collisions.splice( index, 1 );
 
@@ -1171,7 +1172,7 @@ class XRIntersections extends EventDispatcher {
 		this.emit( 'hoverout', this.selectedObject );
 		this.selectedObject = undefined;
 		controller.userData.hitTime = 0;
-		if ( controller.userData.isGaze ) this.currentPointer.setCursor( - 1 );
+		if ( controller.userData.isGaze ) this.currentPointer.setCursor( -1 );
 
 	}
 
