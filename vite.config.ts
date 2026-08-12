@@ -31,14 +31,14 @@ export default defineConfig(({ mode }) => {
       //license: true,
       emptyOutDir: false,
       lib: {
-        entry: ['./three-xr-controller-manager.js'],
+        entry: ['./index.js'],
         fileName: (format, entryName) => {
           return `three-xr-controller-manager.module.js`;
         },
         formats: ['es'],
       },
       rolldownOptions: {
-        external: ['three', 'three/addons'],
+        external: ['three', 'three/webgpu', 'three/addons'],
 
         output: {
           format: 'es',

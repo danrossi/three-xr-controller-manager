@@ -1,4 +1,4 @@
-import { EventDispatcher } from 'three';
+import { EventDispatcher, Group } from 'three';
 export class XRGamepad extends EventDispatcher<any> {
     /**
      * Constructs a new XRGamepad

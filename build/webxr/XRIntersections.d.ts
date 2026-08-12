@@ -1,4 +1,4 @@
-import { EventDispatcher } from 'three';
+import { EventDispatcher, Group } from 'three';
 /**
  * This class provides a common XR Intersections for grip, hand, transient-pointer and gaze target ray controllers.
  * The events dispatched are pressed, pressedend and movechanged.

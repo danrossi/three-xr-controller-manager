@@ -1,4 +1,4 @@
-import { Object3D, Mesh, Raycaster } from 'three';
+import { Object3D, Group, Mesh, Raycaster } from 'three';
 /**
  * Represents a Gaze pointer model.
  *

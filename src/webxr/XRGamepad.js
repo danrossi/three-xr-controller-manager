@@ -10,148 +10,139 @@
  * @author Dan Rossi / http://github.com/danrossi
  */
 
-import { EventDispatcher } from 'three';
+import { EventDispatcher, Group } from 'three';
 
 class XRGamepad extends EventDispatcher {
+  /**
+   * Constructs a new XRGamepad
+   *
+   * @param {Group} controllerGrip - The controller grip space.
+   */
+  constructor(controllerGrip) {
+    super();
 
-	/**
-     * Constructs a new XRGamepad
+    /**
+     * The current button state to prevent muitiple events called.
      *
-     * @param {Group} controllerGrip - The controller grip space.
+     * @private
+     * @type {Array}
      */
-	constructor( controllerGrip ) {
+    this.previousButtonState = [];
 
-		super();
-
-		/**
-         * The current button state to prevent muitiple events called.
-         *
-         * @private
-         * @type {Array}
-         */
-		this.previousButtonState = [];
-
-		/**
-         * Store the current axis data to detect movement changes.
-         *
-         * @private
-         * @type {Array}
-         */
-		this.previousAxes = null;
-
-		/**
-         * The threshold to detect joystick movement changes.
-         *
-         * @private
-         * @type {Number}
-         */
-		this._moveThreshold = 0.08;
-
-		/**
-         * The grip controller to get update events from.
-         *
-         * @private
-         * @type {?Group}
-         */
-		this._controllerGrip = controllerGrip;
-
-		/**
-         * The grip update callback reference
-         *
-         * @private
-         * @param {Object} event
-         * @returns {void}
-         */
-		this._updateRef = ( event ) => this._update( event.data );
-
-		//initially set enabled
-		this.enable = true;
-
-	}
-
-	/**
-     * Enable / disable the grip controller updates.
-     * @param {boolean} value
+    /**
+     * Store the current axis data to detect movement changes.
+     *
+     * @private
+     * @type {Array}
      */
-	set enable( value ) {
+    this.previousAxes = null;
 
-		const controllerGrip = this._controllerGrip;
-
-		controllerGrip.eventsEnabled = value;
-		if ( value ) {
-
-			controllerGrip.addEventListener( 'update', this._updateRef );
-
-		} else {
-
-			controllerGrip.removeEventListener( 'update', this._updateRef );
-
-		}
-
-	}
-
-	/**
-     * Update the move change detection threshold.
-     * @param {boolean} threshold
+    /**
+     * The threshold to detect joystick movement changes.
+     *
+     * @private
+     * @type {Number}
      */
-	set moveThreshold( threshold ) {
+    this._moveThreshold = 0.08;
 
-		this._moveThreshold = threshold;
-
-	}
-
-	/**
-     * Gamepad XR controller update method on connection
-     * @param {XRInputSource} inputSource
+    /**
+     * The grip controller to get update events from.
+     *
+     * @private
+     * @type {?Group}
      */
-	_update( inputSource ) {
+    this._controllerGrip = controllerGrip;
 
-		const gamepad = inputSource.gamepad,
-			buttons = gamepad.buttons,
-			//is a button pressed with a value of 1
-			activeButton = buttons.filter( button => button.pressed && button.value == 1 )[ 0 ],
-			activeIndex = buttons.indexOf( activeButton );
+    /**
+     * The grip update callback reference
+     *
+     * @private
+     * @param {Object} event
+     * @returns {void}
+     */
+    this._updateRef = (event) => this._update(event.data);
 
-		//check once if a button has been pressed and not set as its active for many frames
-		if ( activeButton && ! this.previousButtonState[ activeIndex ] ) {
+    //initially set enabled
+    this.enable = true;
+  }
 
-			//console.log("active ", activeButton, activeIndex);
+  /**
+   * Enable / disable the grip controller updates.
+   * @param {boolean} value
+   */
+  set enable(value) {
+    const controllerGrip = this._controllerGrip;
 
-			this.previousButtonState[ activeIndex ] = true;
+    controllerGrip.eventsEnabled = value;
+    if (value) {
+      controllerGrip.addEventListener('update', this._updateRef);
+    } else {
+      controllerGrip.removeEventListener('update', this._updateRef);
+    }
+  }
 
-			this.dispatchEvent( { type: 'pressed', button: activeButton, index: activeIndex } );
+  /**
+   * Update the move change detection threshold.
+   * @param {boolean} threshold
+   */
+  set moveThreshold(threshold) {
+    this._moveThreshold = threshold;
+  }
 
-			//clear the pressed stated after 300ms when the gamepad button pressed stage changes
-			setTimeout( () => {
+  /**
+   * Gamepad XR controller update method on connection
+   * @param {XRInputSource} inputSource
+   */
+  _update(inputSource) {
+    const gamepad = inputSource.gamepad,
+      buttons = gamepad.buttons,
+      //is a button pressed with a value of 1
+      activeButton = buttons.filter(
+        (button) => button.pressed && button.value == 1,
+      )[0],
+      activeIndex = buttons.indexOf(activeButton);
 
-				this.previousButtonState[ activeIndex ] = false;
-				this.dispatchEvent( { type: 'pressedend', button: activeButton, index: activeIndex } );
+    //check once if a button has been pressed and not set as its active for many frames
+    if (activeButton && !this.previousButtonState[activeIndex]) {
+      //console.log("active ", activeButton, activeIndex);
 
-			}, 300 );
+      this.previousButtonState[activeIndex] = true;
 
-		}
+      this.dispatchEvent({
+        type: 'pressed',
+        button: activeButton,
+        index: activeIndex,
+      });
 
-		const currentAxes = gamepad.axes;
+      //clear the pressed stated after 300ms when the gamepad button pressed stage changes
+      setTimeout(() => {
+        this.previousButtonState[activeIndex] = false;
+        this.dispatchEvent({
+          type: 'pressedend',
+          button: activeButton,
+          index: activeIndex,
+        });
+      }, 300);
+    }
 
-		//check for joystick axes changes
-		if ( this.previousAxes ) {
+    const currentAxes = gamepad.axes;
 
-			//only update a move changed event if values of the axes changes within a threashold
+    //check for joystick axes changes
+    if (this.previousAxes) {
+      //only update a move changed event if values of the axes changes within a threashold
 
-			const hasChanged = currentAxes.some( ( value, index ) => Math.abs( value - this.previousAxes[ index ] ) > this._moveThreshold );
+      const hasChanged = currentAxes.some(
+        (value, index) =>
+          Math.abs(value - this.previousAxes[index]) > this._moveThreshold,
+      );
 
-			if ( hasChanged ) {
+      if (hasChanged) {
+        this.dispatchEvent({ type: 'movechanged', axes: currentAxes });
+      }
+    }
 
-				this.dispatchEvent( { type: 'movechanged', axes: currentAxes } );
-
-			}
-
-		}
-
-		this.previousAxes = currentAxes.slice();
-
-	}
-
+    this.previousAxes = currentAxes.slice();
+  }
 }
 
 export { XRGamepad };

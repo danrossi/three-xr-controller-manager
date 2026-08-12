@@ -10,6 +10,6 @@
     //"skipLibCheck": true,
     "types": ["vite/client", "@types/three"]
   },
-  "include": ["./src/**/*.js"],
+  "include": ["./src/**/*.js", "./index.d.ts"],
   "exclude": ["./node_modules", "../../../../lib/node_modules"]
 }

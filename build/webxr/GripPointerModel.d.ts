@@ -1,4 +1,4 @@
-import { Object3D, BufferGeometry, LineBasicMaterial, Line, Mesh, Raycaster } from 'three';
+import { Object3D, Group, BufferGeometry, LineBasicMaterial, Line, Mesh, Raycaster } from 'three';
 /**
  * Represents a Grip pointer model.
  * Creates a cursor and line for a grip model.
