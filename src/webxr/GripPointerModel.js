@@ -36,7 +36,7 @@ class GripPointerModel extends Object3D {
    *
    * @param {Group} controller - The WebXR controller in target ray space.
    * @param {number} lineDistance - The default line distance.
-   * @param {mumber} lineWidth - The line width.
+   * @param {number} lineWidth - The line width.
    * @param {number} lineColor = The default line color.
    * @param {number} activeLineColor = The active line color.
    * @param {number} cursorDistance = The default cursor distance.

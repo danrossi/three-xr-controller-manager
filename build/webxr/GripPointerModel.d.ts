@@ -13,13 +13,13 @@ export class GripPointerModel extends Object3D<import('three').Object3DEventMap>
      *
      * @param {Group} controller - The WebXR controller in target ray space.
      * @param {number} lineDistance - The default line distance.
-     * @param {mumber} lineWidth - The line width.
+     * @param {number} lineWidth - The line width.
      * @param {number} lineColor = The default line color.
      * @param {number} activeLineColor = The active line color.
      * @param {number} cursorDistance = The default cursor distance.
      * @param {number} cursorRadius - The default cursor radius.
      */
-    constructor(controller: Group, lineDistance?: number, lineWidth?: mumber, lineColor?: number, activeLineColor?: number, cursorDistance?: number, cursorRadius?: number);
+    constructor(controller: Group, lineDistance?: number, lineWidth?: number, lineColor?: number, activeLineColor?: number, cursorDistance?: number, cursorRadius?: number);
     /**
      * The WebXR controller in target ray space.
      *
@@ -52,7 +52,7 @@ export class GripPointerModel extends Object3D<import('three').Object3DEventMap>
     _lineColor: number;
     _activeLineColor: number;
     _lineDistance: number;
-    _lineWidth: mumber;
+    _lineWidth: number;
     _cursorDistance: number;
     _cursorRadius: number;
     /**
