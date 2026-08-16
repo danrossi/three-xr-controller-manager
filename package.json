@@ -2,7 +2,7 @@
   "name": "three-xr-controller-manager",
   "version": "0.1.0",
   "description": "Three.js XR Controller Manager",
-  "module": "build/three-xr-controller-manager.module.js",
+  "module": "./index.js",
   "types": "./index.d.ts",
   "type": "module",
   "scripts": {

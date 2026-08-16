@@ -6,7 +6,9 @@ import {
   Vector3,
   WebXRManager,
 } from 'three';
-import { XRManager } from 'three/webgpu';
+
+/** @import { XRManager } from "three/webgpu" */
+
 import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
 import { OculusHandModel } from 'three/addons/webxr/OculusHandModel.js';
 import { OculusHandPointerModel } from 'three/addons/webxr/OculusHandPointerModel.js';

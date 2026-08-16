@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
         formats: ['es'],
       },
       rolldownOptions: {
-        external: ['three', 'three/webgpu', 'three/addons'],
+        external: ['three', 'three/webgpu', 'three/addons/*'],
 
         output: {
           format: 'es',
