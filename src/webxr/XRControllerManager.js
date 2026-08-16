@@ -1,13 +1,7 @@
-import {
-  EventDispatcher,
-  Scene,
-  Object3D,
-  Group,
-  Vector3,
-  WebXRManager,
-} from 'three';
+import { EventDispatcher, Scene, Object3D, Group, Vector3 } from 'three';
 
 /** @import { XRManager } from "three/webgpu" */
+/** @import { WebXRManager } from "three" */
 
 import { XRControllerModelFactory } from 'three/addons/webxr/XRControllerModelFactory.js';
 import { OculusHandModel } from 'three/addons/webxr/OculusHandModel.js';
