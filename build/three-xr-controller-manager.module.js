@@ -3356,6 +3356,12 @@ var XRControllerManager = class extends EventDispatcher {
 			this._xrGamepad = null;
 		}
 	}
+	dispose() {
+		this._controller.dispatchEvent({ type: "disconnected " });
+		if (this.hand) this._scene.remove(this.hand);
+		if (this.controllerGrip) this._scene.remove(this.controllerGrip);
+		this._scene.remove(this._controller);
+	}
 };
 //#endregion
 export { XRControllerManager, XRGamepad, XRIntersections };

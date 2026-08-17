@@ -222,4 +222,8 @@ export class XRControllerManager extends EventDispatcher<any> {
     _onControllerConnected(event: Object): void;
     _xrGamepad: XRGamepad | null | undefined;
     _onControllerDisconnected(event: any): void;
+    /**
+     * Dispose the controller for switching renderers for XR
+     */
+    dispose(): void;
 }

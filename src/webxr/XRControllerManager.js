@@ -538,6 +538,16 @@ class XRControllerManager extends EventDispatcher {
       this._xrGamepad = null;
     }
   }
+
+  /**
+   * Dispose the controller for switching renderers for XR
+   */
+  dispose() {
+    this._controller.dispatchEvent({ type: 'disconnected ' });
+    if (this.hand) this._scene.remove(this.hand);
+    if (this.controllerGrip) this._scene.remove(this.controllerGrip);
+    this._scene.remove(this._controller);
+  }
 }
 
 export { XRControllerManager };
