@@ -2974,8 +2974,8 @@ var XRGamepad = class extends EventDispatcher {
 	set enable(value) {
 		const controllerGrip = this._controllerGrip;
 		controllerGrip.eventsEnabled = value;
-		if (value) controllerGrip.addEventListener("gripUpdate", this._updateRef);
-		else controllerGrip.removeEventListener("gripUpdate", this._updateRef);
+		if (value) controllerGrip.addEventListener("gripUpdated", this._updateRef);
+		else controllerGrip.removeEventListener("gripUpdated", this._updateRef);
 	}
 	set moveThreshold(threshold) {
 		this._moveThreshold = threshold;
